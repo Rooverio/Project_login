@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <!-- Favicon (Icon Title) - KB Bank Yellow Icon -->
+    <link rel="icon" href="favicon (1).ico" type="image/x-icon">
+
+    <style>
+        /* Background image for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/b/b7/Foto_kantor_KB_Bukopin.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            position: relative;
+        }
+
+        /* Styling for the login box */
+        .login-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the time clock */
+        #clock {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/KB_Bank.png" alt="KB Bank">	
+
+    <div class="login-box">
+        <h2>Login</h2>
+        <form id="loginForm" method="POST">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Clock in the top right corner -->
+    <div id="clock"></div>
+
+<script>
+    // Simulasi login dengan ID dan Password tertanam
+    const validCredentials = [
+        { username: 'joker', password: 'password123' },
+        { username: 'admin', password: 'admin2024' },
+        { username: 'user123', password: 'userpass567' },
+        { username: 'developer1', password: 'devpassword01' },
+        { username: 'manager2', password: 'mngpassword02' },
+        { username: 'employee3', password: 'empassword03' },
+        { username: 'guest4', password: 'guestpass04' },
+        { username: 'vip5', password: 'vippassword05' },
+        { username: 'staff6', password: 'staffpass06' },
+        { username: 'intern7', password: 'internpass07' },
+        { username: 'customer8', password: 'custpassword08' },
+        { username: 'user9', password: 'userpassword09' },
+        { username: 'manager10', password: 'mngpass10' },
+        { username: 'director11', password: 'dirpassword11' },
+        { username: 'admin12', password: 'adminpass12' }
+    ];
+
+    document.getElementById("loginForm").onsubmit = function(event) {
+        event.preventDefault();
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Cek kredensial yang tertanam di kode
+        var validLogin = validCredentials.some(function(cred) {
+            return cred.username === username && cred.password === password;
+        });
+
+        if (validLogin) {
+            window.location.href = "https://bit.ly/Project_Payment"; // Arahkan ke URL setelah login berhasil    
+        } else {
+            alert("Invalid credentials!");
+        }
+    };
+
+    // Fungsi untuk memperbarui jam dan tanggal dengan warna acak
+    function updateClock() {
+        var now = new Date();
+
+        // Mendapatkan jam, menit, dan detik
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+
+        // Mendapatkan tanggal lengkap
+        var dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
+        var day = now.getDate().toString().padStart(2, '0');
+        var month = (now.getMonth() + 1).toString().padStart(2, '0');
+        var year = now.getFullYear();
+
+        // Menampilkan jam dan tanggal
+        var timeString = `${dayOfWeek}, ${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+
+        // Menampilkan di elemen dengan ID 'clock'
+        document.getElementById('clock').innerHTML = timeString;
+
+        // Mengubah warna teks secara acak setiap detik
+        var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        document.getElementById('clock').style.color = randomColor;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();  // Panggil sekali agar jam langsung muncul
+</script>
+
+</body>
+</html>
